@@ -18,7 +18,7 @@ from azure.ai.evaluation import (
     TaskAdherenceEvaluator, ContentSafetyEvaluator, CodeVulnerabilityEvaluator, 
     IndirectAttackEvaluator)
 
-from azure.identity import DefaultAzureCredential
+from azure.identity import DefaultAzureCredential, AzureCliCredential, ChainedTokenCredential
 import logging
 import pandas as pd
 
@@ -66,13 +66,27 @@ def run_simple_evaluation():
     deployment_name = "gpt-4.1-mini"
     agent_name = "policy-checker"
 
-    # Initialize client
-    credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
+    # Initialize client with enhanced authentication
+    print("🔐 Setting up Azure authentication...")
+    try:
+        # Create enhanced credential chain for better authentication
+        cli_credential = AzureCliCredential()
+        credential = ChainedTokenCredential(
+            cli_credential,  # Try Azure CLI first
+            DefaultAzureCredential(exclude_interactive_browser_credential=False)  # Then default options
+        )
+        print("✅ Authentication credential created successfully")
+    except Exception as e:
+        print(f"❌ Authentication setup failed: {e}")
+        print("💡 To fix this, run 'az login' in your terminal")
+        raise
+        
     ai_project = AIProjectClient(
         credential=credential,
         endpoint=project_endpoint,
         api_version="2025-05-15-preview"
     )
+    print("✅ AIProjectClient created successfully")
 
     # Find agent
     print(f"🔍 Looking for agent named '{agent_name}'...")
