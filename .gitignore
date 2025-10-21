@@ -204,3 +204,5 @@ cython_debug/
 azure_search_integration_summary.json
 processed_documents_for_vectorization.json
 processing_summary_gpt4o.json
+/csharp-orchestration/.vs/AgenticOrchestration/DesignTimeBuild
+/csharp-orchestration/.vs/AgenticOrchestration/FileContentIndex
