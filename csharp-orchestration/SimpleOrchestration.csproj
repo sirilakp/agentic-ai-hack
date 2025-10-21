@@ -4,12 +4,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AgenticOrchestration</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputPath>bin\Simple\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\Simple\$(Configuration)\</IntermediateOutputPath>
+    <UserSecretsId>23e831af-78c6-463a-954a-7191296fd76e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <!-- Latest Swagger -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Include only SimpleOrchestration specific files -->
+    <Compile Include="SimpleProgram.cs" />
+    <Compile Include="SimpleServices\*.cs" />
   </ItemGroup>
 
 </Project>

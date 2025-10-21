@@ -3,13 +3,28 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+ <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1b7128df-70ff-42cc-8f39-6958cef12259</UserSecretsId>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+ <OutputPath>bin\Clean\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\Clean\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Latest packages -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="CleanProgram.cs" />
+    
+    <!-- Explicitly exclude all other files -->
+ <Compile Remove="Program.cs" />
+ <Compile Remove="SimpleProgram.cs" />
+    <Compile Remove="Services\**" />
+    <Compile Remove="AuthenticatedServices\**" />
+    <Compile Remove="Models\**" />
   </ItemGroup>
 
 </Project>
